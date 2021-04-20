@@ -1,6 +1,5 @@
 import java.util.Scanner;
-
-import Page.TitlePage;
+import java.util.Vector;
 
 public class Main {
 
@@ -16,9 +15,10 @@ public class Main {
 		/*중복 문자 제거*/
 		String delStr = deDuplication(str);
 		
-		String[] pwBoard = makePasswordBoard(delStr);
+		/*Board 만들기*/
+		Vector<String> pwBoard = makePasswordBoard(delStr);
 		
-		//assassinator
+		
 	}
 	/*중복 문자 제거 함수*/
 	public static String deDuplication(String str) {
@@ -38,31 +38,41 @@ public class Main {
 	}
 
 	/*board에 문자 넣기*/
-	public static String[] makePasswordBoard(String str) {	
-		String[] pwBoard = new String[25];
-		
+	public static Vector<String> makePasswordBoard(String str) {	
+		//String[] pwBoard = new String[26];
+		Vector<String> pwBoard = new Vector<String>();
 		for(int i=0; i<str.length(); i++) {
-			pwBoard[i] = Character.toString(str.charAt(i));
+			pwBoard.add(Character.toString(str.charAt(i)));
 		}
+		
 		int j = 65;
-		for(int i=str.length(); i<pwBoard.length; i++) {
+		for(int i=str.length(); i<26; i++) {
 			String ch = Character.toString((char)j);
-			if(!str.contains(ch)){
-				pwBoard[i] = ch;
+			if(!str.contains(ch)){//암호키에 들어있지 않다면
+				pwBoard.add(ch);
 			}else {
 				i--;
 			}
-			//System.out.println((char)i);
 			j++;
 		}
 		
-		for(int i=0; i<pwBoard.length; i++) {
+		for(int i=0; i<pwBoard.size(); i++) {
+			if(pwBoard.get(i).equals("Q")) {
+				pwBoard.set(i, "Q/Z"); 
+			}else if(pwBoard.get(i).equals("Z")) {
+				pwBoard.remove(i);
+			}
+		}
+		
+		/*출력 코드*/
+		for(int i=0; i<pwBoard.size(); i++) {
 			
 			if(i%5==0) {
 				System.out.println();
 			}
-			System.out.print(pwBoard[i]+" ");
-		}
+			System.out.print(pwBoard.get(i)+"   ");
+		} 
+		
 		return pwBoard;
 		
 	}
