@@ -1,11 +1,13 @@
 package Page;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
 public class ResultPage extends JFrame {
@@ -14,8 +16,6 @@ public class ResultPage extends JFrame {
 	private Font subFont = new Font("한컴 백제 M",Font.PLAIN,20);
 	private Font lableFont = new Font("한컴 백제 B",Font.PLAIN,20);
 	
-	private LineBorder border1 = new LineBorder(Color.BLACK,2,true);
-	
 	private final int WIDTH = 800;
 	private final int HEIGHT = 1000;
 	private final int board_Width = 60;
@@ -23,15 +23,18 @@ public class ResultPage extends JFrame {
 	private final int title_Width = 500;
 	private final int input_Width = 650;
 	
+	private LineBorder border1 = new LineBorder(Color.BLACK,2,true);
+	
+	private JPanel panel = new JPanel();
+	private Dimension size = new Dimension();
+	private JScrollPane scroll;
+	
 	public ResultPage(String _key, String _str) {
+		
+
 		setTitle("Ceasar");
 		setVisible(true);
 		setSize(WIDTH,HEIGHT);
-		
-		JPanel panel = new JPanel();
-		add(panel);
-		panel.setBackground(Color.WHITE);
-		panel.setLayout(null);
 		
 		JLabel title = new JLabel("다중 문자 치환 암호화 공부하기 !");
 		panel.add(title);
@@ -94,5 +97,37 @@ public class ResultPage extends JFrame {
 		divStr.setBounds(WIDTH/2-input_Width/2+5, 850, input_Width, 50);
 		divStr.setHorizontalAlignment(JLabel.LEFT);
 		divStr.setFont(lableFont);
+		
+		JLabel changeStr = new JLabel("asdf");
+		panel.add(changeStr);
+		changeStr.setBounds(WIDTH/2-input_Width/2+5, 910, input_Width, 50);
+		changeStr.setHorizontalAlignment(JLabel.LEFT);
+		changeStr.setFont(lableFont);
+		
+		JLabel cryptogramLabel = new JLabel("암호문");
+		panel.add(cryptogramLabel);
+		cryptogramLabel.setBounds(WIDTH/2-input_Width/2+5, 980, input_Width, 40);
+		cryptogramLabel.setHorizontalAlignment(JLabel.LEFT);
+		cryptogramLabel.setFont(lableFont);
+		
+		JLabel cryptogram = new JLabel("asdfsssssssssssse");
+		panel.add(cryptogram);
+		cryptogram.setBounds(WIDTH/2-input_Width/2+5, 1020, input_Width, 50);
+		cryptogram.setHorizontalAlignment(JLabel.LEFT);
+		cryptogram.setFont(subFont);
+		
+		
+		
+		size.setSize(WIDTH,HEIGHT+300);
+		panel.setBackground(Color.WHITE);
+		panel.setPreferredSize(size);
+		panel.setLayout(null);
+		
+		scroll = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll.setBounds(0, 0, WIDTH, HEIGHT);
+		add(scroll);
+		
+		
+		
 	}
 }

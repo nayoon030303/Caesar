@@ -34,6 +34,7 @@ public class TitlePage extends JFrame{
 		setTitle("Ceasar");
 		setVisible(true);
 		setSize(WIDTH,HEIGHT);
+		setResizable(false);
 			
 		
 		panel.add(title);
