@@ -82,7 +82,7 @@ public class Main {
 			System.out.print(vectorStr.get(i));
 		}
 		
-		
+		makePassword(vectorStr,pwBoard);
 	}
 	
 	/*key 중복 문자 제거 함수*/
@@ -143,6 +143,17 @@ public class Main {
 		for(int i=0; i<input.size(); i+=2) {
 			String cur = input.get(i);
 			String nex = input.get(i+1);
+			int curIndex = 0,nexIndex = 0;
+			
+			for(int j=0; j<board.size(); j++) {
+				if((board.get(i)).equals(cur)) {
+					curIndex = i;
+				}else if((board.get(i)).equals(nex)) {
+					nexIndex = i;
+				}
+			}
+			System.out.println(curIndex+" "+nexIndex);
+			
 		}
 	}
 }
