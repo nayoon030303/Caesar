@@ -155,8 +155,7 @@ public class Multiple extends JFrame {
 					}
 				}
 				
-				if(start) {
-					
+				if(start) {				
 					ResultPage r = new ResultPage(_key,_str);
 					dispose();
 				}

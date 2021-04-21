@@ -31,6 +31,8 @@ public class ResultPage extends JFrame {
 	
 	public ResultPage(String _key, String _str) {
 		
+		_key = _key.toUpperCase();
+		_str = _str.toUpperCase();
 
 		setTitle("Ceasar");
 		setVisible(true);
@@ -127,7 +129,20 @@ public class ResultPage extends JFrame {
 		scroll.setBounds(0, 0, WIDTH, HEIGHT);
 		add(scroll);
 		
+	}
+	
+	void makeBoad(String _key) {
+		String keyForSet = "";
 		
+		_key = _key.replace(" ", "");
+		for(int i=0; i<_key.length(); i++) {
+			String current = Character.toString(_key.charAt(i)); //char->String
+			if(!keyForSet.contains(current)){
+				keyForSet+=current;
+			}
+		}
+		
+		System.out.println(keyForSet);
 		
 	}
 }
