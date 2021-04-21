@@ -8,7 +8,7 @@ import javax.management.Descriptor;
 public class mirim {
 	
 	public static char alphabetBoard[][] = new char[5][5];
-	public static boolean oddFlag = false; //±ÛÀÚ¼ö Ãâ·Â
+	public static boolean oddFlag = false; //ê¸€ììˆ˜ ì¶œë ¥
 	public static String zCheck ="";
 
 	public static void main(String[] args) {
@@ -16,19 +16,19 @@ public class mirim {
 		String decryption;
 		String encryption;
 		
-		Scanner sc = new Scanner(System.in); 	//ÀÔ·ÂÀ» À§ÇÑ Scanner Á¤ÀÇ
-		System.out.print("¾ÏÈ£È­¿¡ ¾²ÀÏ Å°¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
-		String key = sc.nextLine();				//key ÀÔ·Â
-		System.out.print("¾ÏÈ£È­ÇÒ ¹®ÀÚ¿­À» ÀÔ·ÂÇÏ¼¼¿ä : ");
-		String str =  sc.nextLine();				//¹®ÀÚ¿­ ÀÔ·Â
+		Scanner sc = new Scanner(System.in); 	//ì…ë ¥ì„ ìœ„í•œ Scanner ì •ì˜
+		System.out.print("ì•”í˜¸í™”ì— ì“°ì¼ í‚¤ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
+		String key = sc.nextLine();				//key ì…ë ¥
+		System.out.print("ì•”í˜¸í™”í•  ë¬¸ìì—´ì„ ì…ë ¥í•˜ì„¸ìš” : ");
+		String str =  sc.nextLine();				//ë¬¸ìì—´ ì…ë ¥
 		String blankCheck="";
 		int blankCheckCount=0;
 
-		setBoard(key);							//¾ÏÈ£È­¿¡ ¾²ÀÏ ¾ÏÈ£ÆÇ ¼¼ÆÃ
+		setBoard(key);							//ì•”í˜¸í™”ì— ì“°ì¼ ì•”í˜¸íŒ ì„¸íŒ…
 		
 		for( int i = 0 ; i < str.length() ; i++ ) 
 		{
-			if(str.charAt(i)==' ') //°ø¹éÁ¦°Å
+			if(str.charAt(i)==' ') //ê³µë°±ì œê±°
 			{
 				str = str.substring(0,i)+str.substring(i+1,str.length());
 				blankCheck+=10;
@@ -37,7 +37,7 @@ public class mirim {
 			{
 				blankCheck+=0;
 			}
-			if(str.charAt(i)=='z') //z¸¦ q·Î ¹Ù²ãÁà¼­ Ã³¸®ÇÔ.
+			if(str.charAt(i)=='z') //zë¥¼ që¡œ ë°”ê¿”ì¤˜ì„œ ì²˜ë¦¬í•¨.
 			{
 				str = str.substring(0,i)+'q'+str.substring(i+1,str.length());
 				zCheck+=1;
@@ -51,14 +51,14 @@ public class mirim {
 		encryption = strEncryption(key, str);
 		
 
-		//Ãâ·ÂºÎºĞ
-		System.out.println("¾ÏÈ£È­µÈ ¹®ÀÚ¿­ : " + encryption);
+		//ì¶œë ¥ë¶€ë¶„
+		System.out.println("ì•”í˜¸í™”ëœ ë¬¸ìì—´ : " + encryption);
 		
 
 
 		for( int i = 0 ; i < encryption.length() ; i++ ) 
 		{
-			if(encryption.charAt(i)==' ') //°ø¹éÁ¦°Å
+			if(encryption.charAt(i)==' ') //ê³µë°±ì œê±°
 				encryption = encryption.substring(0,i)+encryption.substring(i+1,encryption.length());
 		}
 		
@@ -72,13 +72,13 @@ public class mirim {
 			}
 		}
 		
-		System.out.println("º¹È£È­µÈ ¹®ÀÚ¿­ : " + decryption);
+		System.out.println("ë³µí˜¸í™”ëœ ë¬¸ìì—´ : " + decryption);
 	}
 	
 	private static String strDecryption(String key, String str, String zCheck) {
-		ArrayList<char[]> playFair = new ArrayList<char[]>(); //¹Ù²Ù±â Àü ½ÖÀÚ¾ÏÈ£¸¦ ÀúÀåÇÒ °÷
-		ArrayList<char[]> decPlayFair = new ArrayList<char[]>(); //¹Ù²Û ÈÄÀÇ ½ÖÀÚ¾ÏÈ£ ÀúÀåÇÒ °÷
-		int x1 = 0 , x2 = 0 , y1 = 0, y2 = 0; //½ÖÀÚ ¾ÏÈ£ µÎ ±ÛÀÚÀÇ °¢°¢ÀÇ Çà,¿­ °ª
+		ArrayList<char[]> playFair = new ArrayList<char[]>(); //ë°”ê¾¸ê¸° ì „ ìŒìì•”í˜¸ë¥¼ ì €ì¥í•  ê³³
+		ArrayList<char[]> decPlayFair = new ArrayList<char[]>(); //ë°”ê¾¼ í›„ì˜ ìŒìì•”í˜¸ ì €ì¥í•  ê³³
+		int x1 = 0 , x2 = 0 , y1 = 0, y2 = 0; //ìŒì ì•”í˜¸ ë‘ ê¸€ìì˜ ê°ê°ì˜ í–‰,ì—´ ê°’
 		String decStr ="";
 
 		int lengthOddFlag = 1;
@@ -114,17 +114,17 @@ public class mirim {
 				}
 			}
 			
-			if(x1==x2) //ÇàÀÌ °°Àº °æ¿ì °¢°¢ ¹Ù·Î ¾Æ·¡¿­ ´ëÀÔ
+			if(x1==x2) //í–‰ì´ ê°™ì€ ê²½ìš° ê°ê° ë°”ë¡œ ì•„ë˜ì—´ ëŒ€ì…
 			{
 				tmpArr[0] = alphabetBoard[x1][(y1+4)%5];
 				tmpArr[1] = alphabetBoard[x2][(y2+4)%5];
 			}
-			else if(y1==y2) //¿­ÀÌ °°Àº °æ¿ì °¢°¢ ¹Ù·Î ¿· ¿­ ´ëÀÔ
+			else if(y1==y2) //ì—´ì´ ê°™ì€ ê²½ìš° ê°ê° ë°”ë¡œ ì˜† ì—´ ëŒ€ì…
 			{
 				tmpArr[0] = alphabetBoard[(x1+4)%5][y1];
 				tmpArr[1] = alphabetBoard[(x2+4)%5][y2];
 			}
-			else //Çà, ¿­ ´Ù¸¥°æ¿ì °¢ÀÚ ´ë°¢¼±¿¡ ÀÖ´Â °÷.
+			else //í–‰, ì—´ ë‹¤ë¥¸ê²½ìš° ê°ì ëŒ€ê°ì„ ì— ìˆëŠ” ê³³.
 			{
 				tmpArr[0] = alphabetBoard[x2][y1];
 				tmpArr[1] = alphabetBoard[x1][y2];
@@ -134,7 +134,7 @@ public class mirim {
 			
 		}
 		
-		for(int i = 0 ; i < decPlayFair.size() ; i++) //Áßº¹ ¹®ÀÚ¿­ µ¹·Á³õÀ½
+		for(int i = 0 ; i < decPlayFair.size() ; i++) //ì¤‘ë³µ ë¬¸ìì—´ ëŒë ¤ë†“ìŒ
 		{
 			if(i!=decPlayFair.size()-1 && decPlayFair.get(i)[1]=='x' 
 					&& decPlayFair.get(i)[0]==decPlayFair.get(i+1)[0])
@@ -149,7 +149,7 @@ public class mirim {
 		
 		
 		
-		for(int i = 0 ; i < zCheck.length() ; i++ )//zÀ§Ä¡ Ã£¾Æ¼­ q·Î µ¹·Á³õÀ½
+		for(int i = 0 ; i < zCheck.length() ; i++ )//zìœ„ì¹˜ ì°¾ì•„ì„œ që¡œ ëŒë ¤ë†“ìŒ
 		{
 			if( zCheck.charAt(i) == '1' ) 
 				decStr = decStr.substring(0,i)+'z'+decStr.substring(i+1,decStr.length());
@@ -161,7 +161,7 @@ public class mirim {
 		if(oddFlag) decStr = decStr.substring(0,decStr.length()-1);
 		
 		/*
-		 //¶ç¾î¾²±â
+		 //ë„ì–´ì“°ê¸°
 		for(int i = 0 ; i < decStr.length(); i++)
 		{
 			if(i%2==lengthOddFlag){
@@ -182,12 +182,12 @@ public class mirim {
 		
 		
 		
-		for( int i = 0 ; i < str.length() ; i+=2 ) // arraylist ¼¼ÆÃ
+		for( int i = 0 ; i < str.length() ; i+=2 ) // arraylist ì„¸íŒ…
 		{
 			char[] tmpArr = new char[2];
 			tmpArr[0] = str.charAt(i);
 			try{
-				if( str.charAt(i) == str.charAt(i+1)) //±ÛÀÌ ¹İº¹µÇ¸é xÃß°¡
+				if( str.charAt(i) == str.charAt(i+1)) //ê¸€ì´ ë°˜ë³µë˜ë©´ xì¶”ê°€
 				{
 					tmpArr[1] = 'x';
 					i--;
@@ -212,7 +212,7 @@ public class mirim {
 		{
 
 			char[] tmpArr = new char[2];
-			for( int j = 0 ; j < alphabetBoard.length ; j++ ) //½ÖÀÚ¾ÏÈ£ÀÇ °¢°¢ À§Ä¡Ã¼Å©
+			for( int j = 0 ; j < alphabetBoard.length ; j++ ) //ìŒìì•”í˜¸ì˜ ê°ê° ìœ„ì¹˜ì²´í¬
 			{
 				for( int k = 0 ; k < alphabetBoard[j].length ; k++ )
 				{
@@ -230,17 +230,17 @@ public class mirim {
 			}
 			
 			
-			if(x1==x2) //ÇàÀÌ °°Àº°æ¿ì
+			if(x1==x2) //í–‰ì´ ê°™ì€ê²½ìš°
 			{
 				tmpArr[0] = alphabetBoard[x1][(y1+1)%5];
 				tmpArr[1] = alphabetBoard[x2][(y2+1)%5];
 			}
-			else if(y1==y2) //¿­ÀÌ °°Àº °æ¿ì
+			else if(y1==y2) //ì—´ì´ ê°™ì€ ê²½ìš°
 			{
 				tmpArr[0] = alphabetBoard[(x1+1)%5][y1];
 				tmpArr[1] = alphabetBoard[(x2+1)%5][y2];
 			} 
-			else //Çà, ¿­ ¸ğµÎ ´Ù¸¥°æ¿ì
+			else //í–‰, ì—´ ëª¨ë‘ ë‹¤ë¥¸ê²½ìš°
 			{
 				tmpArr[0] = alphabetBoard[x2][y1];
 				tmpArr[1] = alphabetBoard[x1][y2];
@@ -260,14 +260,14 @@ public class mirim {
 	}
 
 	private static void setBoard(String key) {
-		String keyForSet = "";					// Áßº¹µÈ ¹®ÀÚ°¡ Á¦°ÅµÈ ¹®ÀÚ¿­À» ÀúÀåÇÒ ¹®ÀÚ¿­.
-		boolean duplicationFlag = false;		// ¹®ÀÚ Áßº¹À» Ã¼Å©ÇÏ±â À§ÇÑ flag º¯¼ö.
-		int keyLengthCount = 0;					// alphabetBoard¿¡ keyForSetÀ» ³Ö±â À§ÇÑ countº¯¼ö.
+		String keyForSet = "";					// ì¤‘ë³µëœ ë¬¸ìê°€ ì œê±°ëœ ë¬¸ìì—´ì„ ì €ì¥í•  ë¬¸ìì—´.
+		boolean duplicationFlag = false;		// ë¬¸ì ì¤‘ë³µì„ ì²´í¬í•˜ê¸° ìœ„í•œ flag ë³€ìˆ˜.
+		int keyLengthCount = 0;					// alphabetBoardì— keyForSetì„ ë„£ê¸° ìœ„í•œ countë³€ìˆ˜.
 		
-		key += "abcdefghijklmnopqrstuvwxyz"; 	// Å°¿¡ ¸ğµç ¾ËÆÄºªÀ» Ãß°¡.
+		key += "abcdefghijklmnopqrstuvwxyz"; 	// í‚¤ì— ëª¨ë“  ì•ŒíŒŒë²³ì„ ì¶”ê°€.
 
 		
-		// Áßº¹Ã³¸®
+		// ì¤‘ë³µì²˜ë¦¬
 		for( int i = 0 ; i < key.length() ; i++ ) 
 		{
 			for( int j = 0 ; j < keyForSet.length() ; j++ )
@@ -281,7 +281,7 @@ public class mirim {
 			if(!(duplicationFlag)) keyForSet += key.charAt(i);
 			duplicationFlag = false;
 		}
-		//¹è¿­¿¡ ´ëÀÔ
+		//ë°°ì—´ì— ëŒ€ì…
 		for( int i = 0 ; i < alphabetBoard.length ; i++ )
 		{
 			for( int j = 0; j <alphabetBoard[i].length ; j++ )
@@ -289,7 +289,7 @@ public class mirim {
 				alphabetBoard[i][j] = keyForSet.charAt(keyLengthCount++);
 			}
 		}		
-		//¹è¿­¿¡ ´ëÀÔ
+		//ë°°ì—´ì— ëŒ€ì…
 		for( int i = 0 ; i < alphabetBoard.length ; i++ )
 		{
 			for( int j = 0; j <alphabetBoard[i].length ; j++ )

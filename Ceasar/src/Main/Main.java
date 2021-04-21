@@ -14,22 +14,22 @@ public class Main {
 		String key ="";
 		String input ="";
 		
-		System.out.print("¾ÏÈ£Å°: ");
+		System.out.print("ì•”í˜¸í‚¤: ");
 		key = scan.nextLine();
-		System.out.print("ÀÔ·Â ¹®Àå: ");
+		System.out.print("ì…ë ¥ ë¬¸ì¥: ");
 		input = scan.nextLine();
 		
 		
 		//System.out.println(key);
 		//System.out.println(str);
 		
-		/*key Áßº¹ ¹®ÀÚ Á¦°Å*/
-		String delStr = deDuplication(key);
+		/*key ì¤‘ë³µ ë¬¸ì ì œê±°*/
+		key = deDuplication(key);
 		
-		/*Board ¸¸µé±â*/
-		Vector<String> pwBoard = makePasswordBoard(delStr);
+		/*Board ë§Œë“¤ê¸°*/
+		Vector<String> pwBoard = makePasswordBoard(key);
 		
-		//¹®ÀÚ º¯È¯
+		//ë¬¸ì ë³€í™˜
 		input= input.toUpperCase();
 		for(int i=0; i<input.length(); i++) {
 			if(input.charAt(i) ==' ') {
@@ -46,29 +46,62 @@ public class Main {
 				zCheck+="0";
 			}
 		}
+		
 		System.out.println();
 		System.out.println(input);
-		System.out.println(zCheck);
-		System.out.println(blankCheck);
+		//System.out.println(zCheck);
+		//System.out.println(blankCheck);
 		//Vector<String>  = makeTwoLetters(input);
+		
+		
+		//ë‘ê¸€ìì”© ìë¥´ê¸°
+		Vector<String> vectorStr = new Vector<String>();
+		for(int i=0; i<input.length(); i+=2) {
+			String cur = Character.toString(input.charAt(i));
+			String next = null;
+			if(i<input.length()-1) {
+				next = Character.toString(input.charAt(i+1));
+			}else {
+				next = "X";
+			}
+			
+			if(cur.equals(next)) {
+				vectorStr.add(cur);
+				vectorStr.add("X");
+				i-=1;
+			}else {
+				vectorStr.add(cur);
+				vectorStr.add(next);
+			}
+		}
+		
+		//ì¶œë ¥ 
+		for(int i=0; i<vectorStr.size(); i++) {
+			if(i%2==0 && i!=0)
+				System.out.print(" ");
+			System.out.print(vectorStr.get(i));
+		}
+		
+		
 	}
 	
-	/*key Áßº¹ ¹®ÀÚ Á¦°Å ÇÔ¼ö*/
+	/*key ì¤‘ë³µ ë¬¸ì ì œê±° í•¨ìˆ˜*/
 	public static String deDuplication(String key) {
 		key = key.toUpperCase();
+		key = key.replace(" ", "");
 		String delStr = "";
-		for(int i=0; i<key.length()-1; i++) {
+		for(int i=0; i<key.length(); i++) {
 			String current = Character.toString(key.charAt(i)); //char->String
 			if(!delStr.contains(current)){
-				delStr+=current+"";
+				delStr+=current;
 			}
 		}
 		return delStr;
 	}
 
-	/*board¿¡ ¹®ÀÚ ³Ö±â*/
+	/*board ë§Œë“¤ê¸°*/
 	public static Vector<String> makePasswordBoard(String str) {	
-		//String[] pwBoard = new String[26];
+		
 		Vector<String> pwBoard = new Vector<String>();
 		for(int i=0; i<str.length(); i++) {
 			pwBoard.add(Character.toString(str.charAt(i)));
@@ -77,7 +110,7 @@ public class Main {
 		int j = 65;
 		for(int i=str.length(); i<26; i++) {
 			String ch = Character.toString((char)j);
-			if(!str.contains(ch)){//¾ÏÈ£Å°¿¡ µé¾îÀÖÁö ¾Ê´Ù¸é
+			if(!str.contains(ch)){//ì•”í˜¸í‚¤ì— ë“¤ì–´ìˆì§€ ì•Šë‹¤ë©´
 				pwBoard.add(ch);
 			}else {
 				i--;
@@ -93,7 +126,7 @@ public class Main {
 			}
 		}
 		
-		/*Ãâ·Â ÄÚµå*/
+		/*ì¶œë ¥ ì½”ë“œ*/
 		for(int i=0; i<pwBoard.size(); i++) {
 			
 			if(i%5==0) {
@@ -106,41 +139,10 @@ public class Main {
 		
 	}
 
-	/*2±ÛÂ¥¾¿ ¸¸µé±â*/
-	public static Vector<String> makeTwoLetters(String input) {
-		//String[] str = input.replace(" ", "").toUpperCase().split("");
-		
-		
-		
-		Vector<String> vectorStr = new Vector<String>();
-		
-		/*for(int i=0; i<str.length; i+=2) {
-			String cur = str[i];
-			String next =null;
-			if(i<str.length-1) {
-				next = str[i+1];
-			}else {
-				next = "X";
-			}
-			
-			if(cur.equals(next)) {
-				vectorStr.add(cur);
-				vectorStr.add("X");
-				i-=1;
-				//vectorStr.add(next);
-			}else {
-				vectorStr.add(cur);
-				vectorStr.add(next);
-			}
+	public static void makePassword(Vector<String> input, Vector<String> board) {
+		for(int i=0; i<input.size(); i+=2) {
+			String cur = input.get(i);
+			String nex = input.get(i+1);
 		}
-		System.out.println();
-		
-		for(int i=0; i<vectorStr.size(); i++) {
-			if(i%2==0)
-				System.out.println();
-			System.out.print(vectorStr.get(i)+" ");
-		}*/
-		
-		return vectorStr;
 	}
 }
