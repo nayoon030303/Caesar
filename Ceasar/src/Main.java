@@ -140,6 +140,7 @@ public class Main {
 	}
 
 	public static void makePassword(Vector<String> input, Vector<String> board) {
+		
 		for(int i=0; i<input.size(); i+=2) {
 			String cur = input.get(i);
 			String nex = input.get(i+1);

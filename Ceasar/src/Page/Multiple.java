@@ -138,7 +138,7 @@ public class Multiple extends JFrame {
 				}
 				for(int i=0; i<_key.length(); i++) {
 					if(!(_key.charAt(i) >= 'A' && _key.charAt(i)<='Z' ||
-							_key.charAt(i) >= 'a' && _key.charAt(i)<='z'))
+							_key.charAt(i) >= 'a' && _key.charAt(i)<='z'|| _key.charAt(i) == ' '))
 					{
 						key_explain.setForeground(Color.RED);
 						start = false;
@@ -147,7 +147,7 @@ public class Multiple extends JFrame {
 				}
 				for(int i=0; i<_str.length(); i++) {
 					if(!(_str.charAt(i) >= 'A' && _str.charAt(i)<='Z' ||
-							_str.charAt(i) >= 'a' && _str.charAt(i)<='z'))
+							_str.charAt(i) >= 'a' && _str.charAt(i)<='z' || _str.charAt(i) == ' '))
 					{
 						str_explain.setForeground(Color.RED);
 						start = false;

@@ -174,6 +174,7 @@ public class mirim {
 		return decStr;
 	}
 
+	//암호화
 	private static String strEncryption(String key, String str){
 		ArrayList<char[]> playFair = new ArrayList<char[]>();
 		ArrayList<char[]> encPlayFair = new ArrayList<char[]>();
