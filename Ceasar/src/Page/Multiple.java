@@ -32,7 +32,7 @@ public class Multiple extends JFrame {
 	private final int input_Width = 650;
 	
 	private JPanel panel = new JPanel();
-	private JButton btn = new JButton("암호화/복호화 하러가기");
+	private JButton btn = new JButton("암호화 하러가기");
 	private JTextField key = new JTextField();
 	private JTextField str = new JTextField();
 	private JLabel key_explain = new JLabel("*한국어,숫자,특수문자 입력은 허용되지 않습니다.");
@@ -156,7 +156,7 @@ public class Multiple extends JFrame {
 				}
 				
 				if(start) {				
-					ResultPage r = new ResultPage(_key,_str);
+					EncryptionPage r = new EncryptionPage(_key,_str);
 					dispose();
 				}
 			}

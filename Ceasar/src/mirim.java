@@ -84,6 +84,7 @@ public class mirim {
 		int lengthOddFlag = 1;
 		
 		
+		//암호문 넣기
 		for( int i = 0 ; i < str.length() ; i+=2 )
 		{
 			char[] tmpArr = new char[2];

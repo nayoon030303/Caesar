@@ -3,15 +3,18 @@ package Page;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
-public class ResultPage extends JFrame {
+public class EncryptionPage extends JFrame {
 
 	private Font titleFont = new Font("한컴 백제 B",Font.PLAIN,30);
 	private Font subFont = new Font("한컴 백제 M",Font.PLAIN,23);
@@ -26,18 +29,18 @@ public class ResultPage extends JFrame {
 	
 	private LineBorder border1 = new LineBorder(Color.BLACK,2,true);
 	private JLabel[] board = new JLabel[25];
-	private JLabel divStr = new JLabel("asdf");
-	private JLabel strDecryp = new JLabel("asdf");
-	private JLabel cryptogram = new JLabel("asdfsssssssssssse");
+	private JLabel divStr = new JLabel("2개씩 자르기");
+	private JLabel strEncryp = new JLabel("암호화된 문자");
+	private JButton btnDecryption = new JButton("복호화 하러 가기");
 	private JPanel panel = new JPanel();
 	private Dimension size = new Dimension();
 	private JScrollPane scroll;
-	
+	//Encryption
 	private String zCheck ="";
 	private String blankCheck="";
 	private int blankCheckCount=0;
 	
-	public ResultPage(String _key, String _str) {
+	public EncryptionPage(String _key, String _str) {
 		
 		_key = _key.toUpperCase();
 		_str = _str.toUpperCase();
@@ -105,8 +108,8 @@ public class ResultPage extends JFrame {
 			board[i].setFont(subFont);
 		}
 		
-		_key = setBoard(_key);
-		strEncryption(_key,_str);
+		String board = setBoard(_key);
+		strEncryption(board,_str);
 		
 		
 		panel.add(divStr);
@@ -115,20 +118,29 @@ public class ResultPage extends JFrame {
 		divStr.setFont(lableFont);
 		
 		
-		JLabel strDecrypLabel = new JLabel("암호문");
-		panel.add(strDecrypLabel);
-		strDecrypLabel.setBounds(WIDTH/2-input_Width/2+5, 980, input_Width, 40);
-		strDecrypLabel.setHorizontalAlignment(JLabel.LEFT);
-		strDecrypLabel.setFont(lableFont);
+		JLabel strEncrypLabel = new JLabel("암호문");
+		panel.add(strEncrypLabel);
+		strEncrypLabel.setBounds(WIDTH/2-input_Width/2+5, 950, input_Width, 40);
+		strEncrypLabel.setHorizontalAlignment(JLabel.LEFT);
+		strEncrypLabel.setFont(lableFont);
 		
 		
-		panel.add(strDecryp);
-		strDecryp.setBounds(WIDTH/2-input_Width/2+5, 1020, input_Width, 50);
-		strDecryp.setHorizontalAlignment(JLabel.LEFT);
-		strDecryp.setFont(lableFont);
+		panel.add(strEncryp);
+		strEncryp.setBounds(WIDTH/2-input_Width/2+5, 980, input_Width, 50);
+		strEncryp.setHorizontalAlignment(JLabel.LEFT);
+		strEncryp.setFont(lableFont);
 		
+		panel.add(btnDecryption);
+		btnDecryption.setBounds(WIDTH/2-input_Width/2+5, 1070, 230, 50);
+		btnDecryption.setFocusable(false);
+		btnDecryption.setBorderPainted(false);
+		btnDecryption.setForeground(Color.WHITE);
+		btnDecryption.setBackground(new Color(255, 187,187));
+		btnDecryption.setHorizontalAlignment(JLabel.LEFT);
+		btnDecryption.setFont(lableFont);
+		btnDecryption.addActionListener(new EventHandler());
 
-		size.setSize(WIDTH,HEIGHT+300);
+		size.setSize(WIDTH,HEIGHT+200);
 		panel.setBackground(Color.WHITE);
 		panel.setPreferredSize(size);
 		panel.setLayout(null);
@@ -138,7 +150,17 @@ public class ResultPage extends JFrame {
 		add(scroll);
 		
 	}
+	class EventHandler implements ActionListener{
 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == btnDecryption) {
+				    
+			}
+			
+		}
+		
+	}
 	private String setBoard(String _key) {
 		String keyForSet = "";
 		boolean duplicationFlag = false;
@@ -173,7 +195,14 @@ public class ResultPage extends JFrame {
 		return keyForSet;
 	}
 	
-	private void strEncryption(String _key, String _str) {
+	
+	//복호화
+	private void strDecryption(String _key, String _str) {
+		
+	}
+	
+	//암호화
+	private void strEncryption(String board, String _str) {
 		
 		
 		//blanck, z check
@@ -236,16 +265,16 @@ public class ResultPage extends JFrame {
 			int bx = 0;
 			int ay = 0;
 			int by = 0;
-			for(int j=0; j<_key.length(); j++) {
-				if(playFair.get(i) == _key.charAt(j)) {
+			for(int j=0; j<board.length(); j++) {
+				if(playFair.get(i) == board.charAt(j)) {
 					ax = j%5;
 					ay = j/5;
 					
 					break;
 				}
 			}
-			for(int j=0;j<_key.length(); j++) {
-				if(playFair.get(i+1) == _key.charAt(j)) {
+			for(int j=0;j<board.length(); j++) {
+				if(playFair.get(i+1) == board.charAt(j)) {
 					bx = j%5;
 					by = j/5;
 					
@@ -254,22 +283,20 @@ public class ResultPage extends JFrame {
 			}
 			if(ay==by) //행이 같은 경우 각각 바로 아래열 대입
 			{
-				tmpArr[0] = _key.charAt((ay*5+(ax+1)%5));				
-				tmpArr[1] =_key.charAt((by*5+(bx+1)%5));
+				tmpArr[0] = board.charAt((ay*5+(ax+1)%5));				
+				tmpArr[1] =board.charAt((by*5+(bx+1)%5));
 				
 			}
 			else if(ax==bx) //열이 같은 경우 각각 바로 옆 열 대입
 			{
 			
-				//tmpArr[0] = ' ';				
-				//tmpArr[1] = ' ';
-				tmpArr[0] = _key.charAt((ay+1)%5*5+ax);			
-				tmpArr[1] = _key.charAt((by+1)%5*5+bx);			
+				tmpArr[0] = board.charAt((ay+1)%5*5+ax);			
+				tmpArr[1] = board.charAt((by+1)%5*5+bx);			
 			}
 			else //행, 열 다른경우 각자 대각선에 있는 곳.
 			{
-				tmpArr[0] = _key.charAt(by*5+ax);
-				tmpArr[1] = _key.charAt(ay*5+bx);
+				tmpArr[0] = board.charAt(by*5+ax);
+				tmpArr[1] = board.charAt(ay*5+bx);
 			}
 			//assassinator
 			//Be careful for assassinator
@@ -280,7 +307,7 @@ public class ResultPage extends JFrame {
 		{
 			encStr += encPlayFair.get(i)[0]+""+encPlayFair.get(i)[1]+" ";
 		}
-		strDecryp.setText(encStr);
+		strEncryp.setText(encStr);
 		//System.out.println(encStr);
 	}
 }
