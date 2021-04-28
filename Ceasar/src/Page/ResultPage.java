@@ -27,7 +27,8 @@ public class ResultPage extends JFrame {
 	private LineBorder border1 = new LineBorder(Color.BLACK,2,true);
 	private JLabel[] board = new JLabel[25];
 	private JLabel divStr = new JLabel("asdf");
-	private JLabel changeStr = new JLabel("asdf");
+	private JLabel strDecryp = new JLabel("asdf");
+	private JLabel cryptogram = new JLabel("asdfsssssssssssse");
 	private JPanel panel = new JPanel();
 	private Dimension size = new Dimension();
 	private JScrollPane scroll;
@@ -114,24 +115,19 @@ public class ResultPage extends JFrame {
 		divStr.setFont(lableFont);
 		
 		
-		panel.add(changeStr);
-		changeStr.setBounds(WIDTH/2-input_Width/2+5, 910, input_Width, 50);
-		changeStr.setHorizontalAlignment(JLabel.LEFT);
-		changeStr.setFont(lableFont);
-		
-		JLabel cryptogramLabel = new JLabel("암호문");
-		panel.add(cryptogramLabel);
-		cryptogramLabel.setBounds(WIDTH/2-input_Width/2+5, 980, input_Width, 40);
-		cryptogramLabel.setHorizontalAlignment(JLabel.LEFT);
-		cryptogramLabel.setFont(lableFont);
-		
-		JLabel cryptogram = new JLabel("asdfsssssssssssse");
-		panel.add(cryptogram);
-		cryptogram.setBounds(WIDTH/2-input_Width/2+5, 1020, input_Width, 50);
-		cryptogram.setHorizontalAlignment(JLabel.LEFT);
-		cryptogram.setFont(subFont);
+		JLabel strDecrypLabel = new JLabel("암호문");
+		panel.add(strDecrypLabel);
+		strDecrypLabel.setBounds(WIDTH/2-input_Width/2+5, 980, input_Width, 40);
+		strDecrypLabel.setHorizontalAlignment(JLabel.LEFT);
+		strDecrypLabel.setFont(lableFont);
 		
 		
+		panel.add(strDecryp);
+		strDecryp.setBounds(WIDTH/2-input_Width/2+5, 1020, input_Width, 50);
+		strDecryp.setHorizontalAlignment(JLabel.LEFT);
+		strDecryp.setFont(lableFont);
+		
+
 		size.setSize(WIDTH,HEIGHT+300);
 		panel.setBackground(Color.WHITE);
 		panel.setPreferredSize(size);
@@ -200,7 +196,7 @@ public class ResultPage extends JFrame {
 		}
 		
 		Vector<Character> playFair = new Vector<Character>(); //암호화 전 문자  저장
-		Vector<Character> encPlayFair = new Vector<Character>(); //암호화 문자 저장
+		Vector<char[]> encPlayFair = new Vector<char[]>(); //암호화 문자 저장
 		
 		//두 글자씩 나누기
 		for(int i=0; i<_str.length(); i+=2) {
@@ -235,6 +231,7 @@ public class ResultPage extends JFrame {
 		System.out.println(exStr);
 		
 		for(int i=0; i<playFair.size(); i+=2) { 
+			char[] tmpArr = new char[2];
 			int ax = 0;
 			int bx = 0;
 			int ay = 0;
@@ -243,7 +240,7 @@ public class ResultPage extends JFrame {
 				if(playFair.get(i) == _key.charAt(j)) {
 					ax = j%5;
 					ay = j/5;
-					System.out.print(j+" ");
+					
 					break;
 				}
 			}
@@ -251,16 +248,39 @@ public class ResultPage extends JFrame {
 				if(playFair.get(i+1) == _key.charAt(j)) {
 					bx = j%5;
 					by = j/5;
-					System.out.println(j);
+					
 					break;
 				}
 			}
-			//암호화하기
-			int n1 = ax*5+by;
-			int n2 = bx*5+ay;
-			System.out.println("n: "+ax+","+ay+"  "+bx+","+by);
+			if(ay==by) //행이 같은 경우 각각 바로 아래열 대입
+			{
+				tmpArr[0] = _key.charAt((ay*5+(ax+1)%5));				
+				tmpArr[1] =_key.charAt((by*5+(bx+1)%5));
+				
+			}
+			else if(ax==bx) //열이 같은 경우 각각 바로 옆 열 대입
+			{
+			
+				//tmpArr[0] = ' ';				
+				//tmpArr[1] = ' ';
+				tmpArr[0] = _key.charAt((ay+1)%5*5+ax);			
+				tmpArr[1] = _key.charAt((by+1)%5*5+bx);			
+			}
+			else //행, 열 다른경우 각자 대각선에 있는 곳.
+			{
+				tmpArr[0] = _key.charAt(by*5+ax);
+				tmpArr[1] = _key.charAt(ay*5+bx);
+			}
+			//assassinator
+			//Be careful for assassinator
+			encPlayFair.add(tmpArr);	
 		}
-		//assassinator
-		//Be careful for assassinator
+		String encStr ="";
+		for(int i = 0 ; i < encPlayFair.size() ; i++)
+		{
+			encStr += encPlayFair.get(i)[0]+""+encPlayFair.get(i)[1]+" ";
+		}
+		strDecryp.setText(encStr);
+		//System.out.println(encStr);
 	}
 }
