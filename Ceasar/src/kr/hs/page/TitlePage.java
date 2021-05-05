@@ -1,4 +1,4 @@
-package Page;
+package kr.hs.page;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -45,7 +45,7 @@ public class TitlePage extends JFrame{
 		
 		
 		panel.add(start);
-		start.setBounds(WIDTH/2-button_width/2, 400, button_width, 65);
+		start.setBounds(WIDTH/2-button_width/2, 400, button_width, 80);
 		start.setFont(desFont);
 		start.setFocusable(false);
 		start.setBorderPainted(false);
@@ -56,20 +56,9 @@ public class TitlePage extends JFrame{
 		//start.setBorder(border2);
 		
 		
-		panel.add(record);
-		record.setBounds(WIDTH/2-button_width/2, 400+100, button_width, 65);
-		record.setFont(desFont);
-		record.setFocusable(false);
-		record.setBorderPainted(false);
-		record.setForeground(Color.WHITE);
-		record.setBackground(new Color(255, 187,187));
-		record.setHorizontalAlignment(JLabel.CENTER);
-		record.addActionListener(new EventHandler());
-		//record.setBorder(border2);
-		
 	
 		panel.add(exit);
-		exit.setBounds(WIDTH/2-button_width/2, 400+200, button_width, 65);
+		exit.setBounds(WIDTH/2-button_width/2, 400+100, button_width, 80);
 		exit.setFont(desFont);
 		exit.setFocusable(false);
 		exit.setBorderPainted(false);
@@ -84,7 +73,7 @@ public class TitlePage extends JFrame{
 		panel.setLayout(null);
 	}
 	
-	public class EventHandler implements ActionListener{
+	class EventHandler implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
